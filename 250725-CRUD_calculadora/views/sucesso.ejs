@@ -1,0 +1,16 @@
+
+<%console.log('Exibindo página sucesso.ejs')%>
+<%-include('head', {titulo: "Calculadora Tabajara - Resultado"})%>
+<body>
+    <%-include('header')%>
+<% if( typeof(x) !="undefined" ){ %>
+<h1>Resultado:</h1>
+<h3 id="resultado" name="resultado">
+<%=x%>
+</h3>
+<% } else { %>
+<h4>Algo deu errado...</h4>
+<% } %>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+{"nome":"Marlon","n1":"7","n2":"0","op":"-","conta":"subtração","x":7}
