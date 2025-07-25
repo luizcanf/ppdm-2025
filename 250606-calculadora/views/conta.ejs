@@ -1,8 +1,7 @@
-<!DOCTYPE html>
- <head>
-  <meta charset="UTF-8">
-  <title>Calculadora</title>
-  <script>
+
+    <%-include('cabecalho', {titulo: "Calculadora Tabajara"})%>
+
+    <script>
    function soma() {
     result = parseFloat(n1.value) + parseFloat(n2.value);
     document.getElementById("resultado").innerHTML = result;
@@ -31,10 +30,9 @@
     document.getElementById("resultado").innerHTML = result;
    }
   </script>
- </head>
- <body>
+
   <h1>Digite dois números:</h1>
-  <form method="get" action="/operacoes">
+  <form method="post" action="/operacoes">
    <label> Número 1: </label>
    <input id="n1" name="N1"/>
    <label> Número 2: </label>
