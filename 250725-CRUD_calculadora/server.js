@@ -1,5 +1,6 @@
 const fs = require('fs')
 const express = require('express')
+const PORT = process.env.PORT || 3000
 const app = express()
 app.use(express.static("public"));
 app.use(express.json());
@@ -149,4 +150,4 @@ app.route('/fatorial')
         }
         res.render('operacoes', { x: result, a: req.body.n1, b: req.body.n2, nome: req.body.nome })
     })
-app.listen(1342, () => { console.log("Servidor em http://localhost:1342") })
+app.listen(PORT, () => { console.log("Servidor em http://localhost:"+PORT) })

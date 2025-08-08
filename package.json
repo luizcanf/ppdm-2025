@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  },
+  "scripts": {
+    "start": "cd 250725-CRUD_calculadora/ && node server.js"
+  }
+}
