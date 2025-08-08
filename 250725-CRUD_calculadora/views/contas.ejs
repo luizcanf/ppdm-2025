@@ -1,0 +1,31 @@
+<%console.log('Exibindo página contas.ejs')%>
+<%-include('head', {titulo: "Calculadora Tabajara - Registro de Contas"})%>
+<body>
+    <%-include('header')%>
+<% if( typeof(x) !="undefined" ){ %>
+<h3 id="mensagem" name="mensagem">
+<%=x%>
+</h3>
+<% } %>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Ações</th>
+    </tr>
+    <% nomes.forEach(nome => { %>
+    <tr>
+        <td><%=nome%></td>
+        <td>
+            <a href="/visualizar?nome=<%=nome%>"><img src="search.png" alt="Visualizar"></a>
+            <a href="/editar?nome=<%=nome%>"><img src="edit.png" alt="Editar"></a>
+            <a href="/apagar?nome=<%=nome%>"><img src="trash.png" alt="Apagar"></a>
+        </td>
+    </tr>
+    <% }) %>
+    
+    
+</table>
+
+</body>
+
+</html>

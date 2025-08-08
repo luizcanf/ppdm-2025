@@ -19,6 +19,49 @@ function fatorial(n) {
 app.get('/', (request, response) => {
     response.render('operacoes', { a: '', b: '', nome: '' })
 })
+app.route('/contas')
+    .get((req, res) => {
+        let arquivos = fs.readdirSync('dados/')
+        for (i=0; i<arquivos.length; i++) {
+            arquivos[i] = arquivos[i].replace('.txt', '')
+        }
+        res.render('contas', {nomes: arquivos})
+    });
+app.route('/visualizar')
+    .get((req, res) => {
+        const nomeArquivo = 'dados/'+req.query.nome + '.txt'
+        if (fs.existsSync(nomeArquivo)) {
+            const leArquivoBuffer = fs.readFileSync(nomeArquivo);
+            const leArquivoString = leArquivoBuffer.toString();
+            const registro = JSON.parse(leArquivoString);
+            registro.conta = registro.conta[0].toUpperCase() + registro.conta.slice(1)
+            const resultado = `${registro.conta} de ${registro.nome}: ${registro.n1} ${registro.op} ${registro.n2} =  ${registro.x}`
+            res.render('sucesso', { x: resultado, a: registro.n1, b: registro.n2, nome: registro.nome })
+        } else
+            res.render('log', { x: 'Arquivo não encontrado: ' + req.body.nome })
+    })
+
+app.route('/editar')
+    .get((req, res) => {
+        const nomeArquivo = 'dados/'+req.query.nome + '.txt'
+        if (fs.existsSync(nomeArquivo)) {
+            const leArquivoBuffer = fs.readFileSync(nomeArquivo);
+            const leArquivoString = leArquivoBuffer.toString();
+            const jason13 = JSON.parse(leArquivoString);
+            const resultado = 'Operação ' + jason13.conta + ': ' + jason13.x
+            res.render('operacoes', { x: resultado, a: jason13.n1, b: jason13.n2, nome: jason13.nome })
+        } else
+            res.render('log', { x: 'Arquivo não encontrado: ' + req.body.nome })
+    })
+app.route('/apagar')
+    .get((req, res) => {
+        const nomeArquivo = 'dados/'+req.query.nome + '.txt'
+        if (fs.existsSync(nomeArquivo)) {
+            fs.rmSync(nomeArquivo)
+            res.redirect('/contas')
+        } else
+            res.render('log', { x: 'Arquivo não encontrado: ' + req.body.nome })
+    })
 app.route('/log')
     .get((req, res) => {
         res.render('log')
